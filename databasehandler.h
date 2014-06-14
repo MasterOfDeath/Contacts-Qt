@@ -7,7 +7,6 @@
 #include <QSqlQueryModel>
 #include <QSqlTableModel>
 #include <QFile>
-
 #include <QMessageBox>
 #include <QDebug>
 

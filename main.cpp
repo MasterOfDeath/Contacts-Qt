@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
 
     QApplication a(argc, argv);
 
-    //qDebug() << Person::CREATE_TABLE;
+    qDebug() << Person::CREATE_TABLE;
 
     DatabaseHandler d;
     d.openDB();
