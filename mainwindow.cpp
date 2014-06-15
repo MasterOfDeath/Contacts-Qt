@@ -7,7 +7,21 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    DatabaseHandler d;
+
+    // Action bar
+    ActionBar* actionBar=new ActionBar(this);
+    actionBar->setTitle("Nachrichten",true);
+    actionBar->addAction(new QAction("Wetter",this));
+    actionBar->addAction(new QAction("Sport",this));
+    actionBar->addButton(new QAction(QIcon(":icons/search"),"Suchen",this));
+    actionBar->addButton(new QAction(QIcon(":icons/call"),"Anrufen",this));
+    actionBar->addButton(new QAction(QIcon(":icons/chat"),"Chatten",this));
+    actionBar->addButton(new QAction(QIcon(":icons/email"),"Email",this));
+    actionBar->addButton(new QAction(QIcon(":icons/bad"),"Schlecht",this));
+    actionBar->addButton(new QAction(QIcon(":icons/good"),"Gut",this));
+    ui->mainToolBar->addWidget(actionBar);
+
+
     d.openDB();
     QSqlQueryModel *model = d.queryAllData();
 
@@ -15,10 +29,11 @@ MainWindow::MainWindow(QWidget *parent) :
     QListView *listView = new QListView();
     listView->setItemDelegate(new MyCustomListViewItemDelegate());
     listView->setModel(model);
-    listView->setModelColumn(1);
+    listView->setModelColumn(model->record().indexOf(Person::COL_FIO));
     listView->setMaximumWidth(300);
     listView->setMinimumWidth(200);
     ui->centralWidget->layout()->addWidget(listView);
+    connect(listView,SIGNAL(clicked(const QModelIndex)),this,SLOT(listViewItemClicked(QModelIndex)));
 
     //Лейаут для правой панели экрана
     QHBoxLayout * rightPanel = new QHBoxLayout();
@@ -58,7 +73,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //ФИО
     QLabel *labelFIO = new QLabel("ФИО");
-    QPlainTextEdit *teFIO = new QPlainTextEdit();
+    teFIO = new QPlainTextEdit();
     //setTEHeight(teFIO,6);
     //teFIO->setMaximumBlockCount(5);
     leftHalfPanel1->addWidget(labelFIO);
@@ -68,7 +83,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //Дата рождения
     QLabel *labelDR = new QLabel("Дата\nрождения");
-    QLineEdit *teDR = new QLineEdit();
+    teDR = new QLineEdit();
     leftHalfPanel2->addWidget(labelDR);
     //leftHalfPanel2->setAlignment(labelDR,Qt::AlignVCenter);
     leftHalfPanel2->addWidget(teDR);
@@ -76,7 +91,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //Родители
     QLabel *labelParents = new QLabel("Родители");
-    QPlainTextEdit *teParents = new QPlainTextEdit();
+    teParents = new QPlainTextEdit();
     leftHalfPanel3->addWidget(labelParents);
     //leftHalfPanel3->setAlignment(labelParents,Qt::AlignVCenter);
     leftHalfPanel3->addWidget(teParents);
@@ -84,7 +99,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //Адрес
     QLabel *labelAddress = new QLabel("Адрес");
-    QPlainTextEdit *teAddress = new QPlainTextEdit();
+    teAddress = new QPlainTextEdit();
     leftHalfPanel4->addWidget(labelAddress);
     //leftHalfPanel4->setAlignment(labelAddress,Qt::AlignVCenter);
     leftHalfPanel4->addWidget(teAddress);
@@ -92,7 +107,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //Дополнительная информация
     QLabel *labelInfo = new QLabel("Дополнительная\nинформация");
-    QPlainTextEdit *teInfo = new QPlainTextEdit();
+    teInfo = new QPlainTextEdit();
     leftHalfPanel5->addWidget(labelInfo);
     //leftHalfPanel5->setAlignment(labelInfo,Qt::AlignVCenter);
     leftHalfPanel5->addWidget(teInfo);
@@ -100,7 +115,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //Дата долг. тен.
     QLabel *labelDDolTen = new QLabel("Дата\nдолгосроч. тенд.");
-    QLineEdit *teDDolTen = new QLineEdit();
+    teDDolTen = new QLineEdit();
     rightHalfPanel1->addWidget(labelDDolTen);
     //rightHalfPanel1->setAlignment(labelDDolTen,Qt::AlignVCenter);
     rightHalfPanel1->addWidget(teDDolTen);
@@ -108,7 +123,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //Долгосрочная тенденция
     QLabel *labelDolTen = new QLabel("Долгосрочная\nтенденция");
-    QPlainTextEdit *teDolTen = new QPlainTextEdit();
+    teDolTen = new QPlainTextEdit();
     rightHalfPanel2->addWidget(labelDolTen);
     //rightHalfPanel2->setAlignment(labelDolTen,Qt::AlignVCenter);
     rightHalfPanel2->addWidget(teDolTen);
@@ -116,7 +131,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //Дата следующей встречи
     QLabel *labelDNextDate = new QLabel("Дата следующей\nвстречи");
-    QLineEdit *teDNextDate = new QLineEdit();
+    teDNextDate = new QLineEdit();
     rightHalfPanel3->addWidget(labelDNextDate);
     //rightHalfPanel3->setAlignment(labelDNextDate,Qt::AlignVCenter);
     rightHalfPanel3->addWidget(teDNextDate);
@@ -124,7 +139,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //Следующий визит
     QLabel *labelNextDate = new QLabel("Следующий\nвизит");
-    QPlainTextEdit *teNextDate = new QPlainTextEdit();
+    teNextDate = new QPlainTextEdit();
     rightHalfPanel4->addWidget(labelNextDate);
     //rightHalfPanel4->setAlignment(labelNextDate,Qt::AlignVCenter);
     rightHalfPanel4->addWidget(teNextDate);
@@ -132,7 +147,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //Последние визиты
     QLabel *labelLastDate = new QLabel("Последние\nвизиты");
-    QPlainTextEdit *teLastDate = new QPlainTextEdit();
+    teLastDate = new QPlainTextEdit();
     rightHalfPanel5->addWidget(labelLastDate);
     //rightHalfPanel5->setAlignment(labelLastDate,Qt::AlignVCenter);
     rightHalfPanel5->addWidget(teLastDate);
@@ -145,8 +160,35 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::setTEHeight (QPlainTextEdit* edit, int nRows)
-  {
-  QFontMetrics m (edit -> font()) ;
-  int RowHeight = m.lineSpacing() ;
-  edit -> setFixedHeight  (nRows * RowHeight) ;
-  }
+{
+    QFontMetrics m (edit -> font()) ;
+    int RowHeight = m.lineSpacing() ;
+    edit -> setFixedHeight  (nRows * RowHeight) ;
+}
+
+void MainWindow::listViewItemClicked(QModelIndex index )
+{
+    id = index.model()->data(index.model()->index(index.row(), 0), Qt::DisplayRole).toInt();
+
+    refreshUI();
+
+    //qDebug() <<"id=" <<id;
+}
+
+void MainWindow::refreshUI()
+{
+    QSqlQueryModel *oneModel = d.queryOneRow(id);
+
+    teFIO->setPlainText(oneModel->record(0).value(Person::COL_FIO).toString());
+    teDR->setText(oneModel->record(0).value(Person::COL_DR).toString());
+    teParents->setPlainText(oneModel->record(0).value(Person::COL_PARENTS).toString());
+    teAddress->setPlainText(oneModel->record(0).value(Person::COL_M_ADDR).toString());
+    teInfo->setPlainText(oneModel->record(0).value(Person::COL_INFO).toString());
+    teDDolTen->setText(oneModel->record(0).value(Person::COL_D_DOLTEN).toString());
+    teDolTen->setPlainText(oneModel->record(0).value(Person::COL_DOLTEN).toString());
+    teDNextDate->setText(oneModel->record(0).value(Person::COL_D_NEXTDATE).toString());
+    teNextDate->setPlainText(oneModel->record(0).value(Person::COL_NEXTDATE).toString());
+    teLastDate->setPlainText(oneModel->record(0).value(Person::COL_LASTDATE).toString());
+
+    delete(oneModel);
+}

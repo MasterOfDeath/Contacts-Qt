@@ -1,0 +1,13 @@
+<RCC>
+    <qresource prefix="/icons">
+        <file alias="app">icons/app.png</file>
+        <file alias="overflow">icons/ic_action_overflow.png</file>
+        <file alias="search">icons/ic_action_search.png</file>
+        <file alias="call">icons/ic_action_call.png</file>
+        <file alias="chat">icons/ic_action_chat.png</file>
+        <file alias="email">icons/ic_action_email.png</file>
+        <file alias="app_up">icons/app_up.png</file>
+        <file alias="bad">icons/ic_action_bad.png</file>
+        <file alias="good">icons/ic_action_good.png</file>
+    </qresource>
+</RCC>

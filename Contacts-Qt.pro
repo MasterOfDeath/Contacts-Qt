@@ -17,12 +17,19 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     databasehandler.cpp \
     person.cpp \
-    customwidget.cpp
+    customwidget.cpp \
+    actionbar.cpp \
+    menustyle.cpp
 
 HEADERS  += mainwindow.h \
     databasehandler.h \
     person.h \
-    customwidget.h
+    customwidget.h \
+    actionbar.h \
+    menustyle.h
 
 FORMS    += mainwindow.ui \
     customlistviewitem.ui
+
+RESOURCES += \
+    resources/icons.qrc
