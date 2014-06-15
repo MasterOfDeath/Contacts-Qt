@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "databasehandler.h"
 #include "person.h"
+#include "customwidget.h"
 #include <QApplication>
 #include <QDebug>
 #include <QTableView>
@@ -12,10 +13,9 @@ int main(int argc, char *argv[])
 
     QApplication a(argc, argv);
 
-    qDebug() << Person::COL_DR;
+    //qDebug() << Person::COL_DR;
 
-    DatabaseHandler d;
-    d.openDB();
+
 
     /*Person pers;
     pers.id=1;
@@ -26,10 +26,12 @@ int main(int argc, char *argv[])
     //QSqlQueryModel *model = new QSqlQueryModel;
     //model->setQuery("SELECT * FROM Persons");
 
-    QTableView *viewTable = new QTableView;
+    /*QTableView *viewTable = new QTableView;
     viewTable->setModel(d.queryAllData());
-    viewTable->show();
+    viewTable->show();*/
 
+    /*MyWidget *tableView = new MyWidget;
+    tableView->show();*/
     //Person *pers = d.getPerson(45);
     //qDebug() << pers->fio;
 
@@ -40,8 +42,8 @@ int main(int argc, char *argv[])
             qDebug() << id << name;
         }*/
 
-    //MainWindow w;
-    //w.show();
+    MainWindow w;
+    w.show();
 
     return a.exec();
 }

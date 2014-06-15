@@ -16,10 +16,13 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     databasehandler.cpp \
-    person.cpp
+    person.cpp \
+    customwidget.cpp
 
 HEADERS  += mainwindow.h \
     databasehandler.h \
-    person.h
+    person.h \
+    customwidget.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    customlistviewitem.ui

@@ -1,8 +1,14 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include "databasehandler.h"
+#include "person.h"
+#include "customwidget.h"
 #include <QMainWindow>
 #include <QDebug>
+#include <QPushButton>
+#include <QLineEdit>
+#include <QPlainTextEdit>
 
 
 namespace Ui {
@@ -19,6 +25,7 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    void setTEHeight (QPlainTextEdit* edit, int nRows);
 };
 
 #endif // MAINWINDOW_H
