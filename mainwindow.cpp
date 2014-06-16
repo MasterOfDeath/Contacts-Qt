@@ -7,21 +7,6 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-
-    // Action bar
-    ActionBar* actionBar=new ActionBar(this);
-    actionBar->setTitle("Nachrichten",true);
-    actionBar->addAction(new QAction("Wetter",this));
-    actionBar->addAction(new QAction("Sport",this));
-    actionBar->addButton(new QAction(QIcon(":icons/search"),"Suchen",this));
-    actionBar->addButton(new QAction(QIcon(":icons/call"),"Anrufen",this));
-    actionBar->addButton(new QAction(QIcon(":icons/chat"),"Chatten",this));
-    actionBar->addButton(new QAction(QIcon(":icons/email"),"Email",this));
-    actionBar->addButton(new QAction(QIcon(":icons/bad"),"Schlecht",this));
-    actionBar->addButton(new QAction(QIcon(":icons/good"),"Gut",this));
-    ui->mainToolBar->addWidget(actionBar);
-
-
     d.openDB();
     QSqlQueryModel *model = d.queryAllData();
 
@@ -152,6 +137,12 @@ MainWindow::MainWindow(QWidget *parent) :
     //rightHalfPanel5->setAlignment(labelLastDate,Qt::AlignVCenter);
     rightHalfPanel5->addWidget(teLastDate);
     //rightHalfPanel5->setAlignment(teLastDate,Qt::AlignTop);
+
+    //ToolBar
+    QWidget* empty = new QWidget();
+    empty->setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Preferred);
+    ui->mainToolBar->addWidget(empty);
+    ui->mainToolBar->addAction(QPixmap(":icons/ic_add"), "Создать новый контакт", this, SLOT(slotNoImpl()));
 }
 
 MainWindow::~MainWindow()
