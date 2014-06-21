@@ -143,6 +143,13 @@ MainWindow::MainWindow(QWidget *parent) :
     empty->setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Preferred);
     ui->mainToolBar->addWidget(empty);
     ui->mainToolBar->addAction(QPixmap(":icons/ic_add"), "Создать новый контакт", this, SLOT(slotNoImpl()));
+    QAction *activeAction = new QAction(QPixmap(":icons/ic_mode_active"),"Активные", this);
+    ui->mainToolBar->addAction(activeAction);
+    QToolButton *activeButton = dynamic_cast<QToolButton*>(ui->mainToolBar->widgetForAction(activeAction));
+    activeButton->setPopupMode(QToolButton::InstantPopup);
+    activeButton->addAction(new QAction(QPixmap(":icons/ic_mode_all"), "Все", this));
+    activeButton->addAction(new QAction(QPixmap(":icons/ic_mode_deactive"), "Архивные", this));
+    ui->mainToolBar->addAction(QPixmap(":icons/ic_search"), "Поиск контакта", this, SLOT(slotNoImpl()));
 }
 
 MainWindow::~MainWindow()
