@@ -4,7 +4,6 @@
 #include "databasehandler.h"
 #include "person.h"
 #include "customwidget.h"
-#include "actionbar.h"
 #include <QMainWindow>
 #include <QDebug>
 #include <QPushButton>

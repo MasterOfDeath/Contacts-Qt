@@ -6,7 +6,10 @@
 MyCustomListViewItem::MyCustomListViewItem(QWidget * parent, Qt::WindowFlags f)
   :QWidget(parent, f)
 {
-  _ui.setupUi(this);
+    _ui.setupUi(this);
+    //Пересчитываем высоту пункта
+    int height = _ui.firstLine->height()+_ui.line->height()+_ui.secLine->height();
+    setGeometry(0,0,401,height);
 }
 
 MyCustomListViewItem::~MyCustomListViewItem()
@@ -52,7 +55,6 @@ void MyCustomListViewItemDelegate::paint(QPainter * painter, const QStyleOptionV
     pal.setBrush(QPalette::Window, QBrush(QColor(Qt::white)));
   }
   _itemWidget->_ui.widget->setPalette(pal);
-  //_itemWidget->setPalette(pal);
 
   // Paint the widget now.
   painter->save();
