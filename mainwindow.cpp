@@ -142,7 +142,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QWidget* empty = new QWidget();
     empty->setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Preferred);
     ui->mainToolBar->addWidget(empty);
-    ui->mainToolBar->addAction(QPixmap(":icons/ic_add"), "Создать новый контакт", this, SLOT(slotNoImpl()));
+    ui->mainToolBar->addAction(QPixmap(":icons/ic_add"), "Создать новый контакт", this, SLOT(addContactClicked()));
     QAction *activeAction = new QAction(QPixmap(":icons/ic_mode_active"),"Активные", this);
     ui->mainToolBar->addAction(activeAction);
     QToolButton *activeButton = dynamic_cast<QToolButton*>(ui->mainToolBar->widgetForAction(activeAction));
@@ -171,6 +171,23 @@ void MainWindow::listViewItemClicked(QModelIndex index )
     refreshUI();
 
     //qDebug() <<"id=" <<id;
+}
+
+void MainWindow::addContactClicked()
+{
+    Person p = Person();
+    d.putPerson(p);
+
+    teFIO->setPlainText("");
+    teDR->setText("");
+    teParents->setPlainText("");
+    teAddress->setPlainText("");
+    teInfo->setPlainText("");
+    teDDolTen->setText("");
+    teDolTen->setPlainText("");
+    teDNextDate->setText("");
+    teNextDate->setPlainText("");
+    teLastDate->setPlainText("");
 }
 
 void MainWindow::refreshUI()
