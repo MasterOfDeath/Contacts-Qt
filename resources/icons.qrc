@@ -15,5 +15,6 @@
         <file>icons/ic_left_day_desc.png</file>
         <file>icons/ic_next_date_asc.png</file>
         <file>icons/ic_next_date_desc.png</file>
+        <file alias="ic_launcher">icons/ic_launcher.ico</file>
     </qresource>
 </RCC>

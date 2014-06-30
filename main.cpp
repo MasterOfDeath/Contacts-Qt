@@ -13,10 +13,6 @@ int main(int argc, char *argv[])
 
     QApplication a(argc, argv);
 
-    //qDebug() << Person::COL_DR;
-
-
-
     /*Person pers;
     pers.id=1;
     pers.fio="oooo";
@@ -41,6 +37,8 @@ int main(int argc, char *argv[])
             QString name = model.record(i).value("fio").toString();
             qDebug() << id << name;
         }*/
+
+    a.setWindowIcon(QIcon(":icons/ic_launcher"));
 
     MainWindow w;
     w.show();

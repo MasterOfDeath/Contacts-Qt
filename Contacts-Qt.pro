@@ -17,15 +17,19 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     databasehandler.cpp \
     person.cpp \
-    customwidget.cpp
+    customwidget.cpp \
+    detaildelegate.cpp
 
 HEADERS  += mainwindow.h \
     databasehandler.h \
     person.h \
-    customwidget.h
+    customwidget.h \
+    detaildelegate.h
 
 FORMS    += mainwindow.ui \
     customlistviewitem.ui
 
 RESOURCES += \
     resources/icons.qrc
+
+win32:RC_ICONS += resources/icons/ic_launcher.ico
