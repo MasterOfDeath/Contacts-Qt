@@ -50,6 +50,8 @@ private:
 
 private slots:
   void addContactClicked();
+  void delContactClicked();
+  void listViewItemClicked(QModelIndex);
 };
 
 

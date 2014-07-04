@@ -1,5 +1,11 @@
 #include "customwidget.h"
 
+const static QColor colors[] = { QColor(244,225,240), //Архивные
+                                 QColor(Qt::white) }; //Активные
+
+const static QColor colorsSel[] = { QColor(244,114,114), //Выделенный
+                                    QColor(168,241,240) }; //Выделенный и архивный
+
 /*
   \class MyCustomListViewItem
 */
@@ -41,19 +47,21 @@ void MyCustomListViewItemDelegate::paint(QPainter * painter, const QStyleOptionV
   // Update data of widget here.
   const QString s = index.model()->data(index).toString();
   const QString s2 = index.model()->data(index.model()->index(index.row(), 0), Qt::DisplayRole).toString();
+  const int status = index.model()->data(index.model()->index(index.row(), 13), Qt::DisplayRole).toInt();
+
   _itemWidget->_ui.firstLine->setText(s);
   _itemWidget->_ui.secLine->setText(s2);
 
   // Change the background color of the widget if it is selected.
   QPalette pal;
-  if ((option.state & QStyle::State_Selected) == QStyle::State_Selected)
-  {
-    pal.setBrush(QPalette::Window, QBrush(QColor(168,241,240)));
+
+  if ((option.state & QStyle::State_Selected) == QStyle::State_Selected) {
+      pal.setBrush(QPalette::Window, QBrush(colorsSel[status]));
   }
-  else
-  {
-    pal.setBrush(QPalette::Window, QBrush(QColor(Qt::white)));
+  else {
+      pal.setBrush(QPalette::Window, QBrush(colors[status]));
   }
+
   _itemWidget->_ui.widget->setPalette(pal);
 
   // Paint the widget now.

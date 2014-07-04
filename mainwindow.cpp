@@ -22,6 +22,7 @@ MainWindow::MainWindow(QWidget *parent) :
     listView->setModelColumn(model->fieldIndex(Person::COL_FIO));
     listView->setMaximumWidth(300);
     listView->setMinimumWidth(200);
+    listView->setContextMenuPolicy(Qt::CustomContextMenu);
     ui->centralWidget->layout()->addWidget(listView);
 
     //Лейаут для правой панели экрана
@@ -173,6 +174,9 @@ MainWindow::MainWindow(QWidget *parent) :
     //При смене item в listView меняется позиция в mapper
     connect(listView->selectionModel(), SIGNAL(currentRowChanged(QModelIndex,QModelIndex)),
               mapper, SLOT(setCurrentModelIndex(QModelIndex)));
+    connect(listView, SIGNAL(clicked(const QModelIndex&)), this, SLOT(listViewItemClicked(QModelIndex)));
+
+    //listView->model()->dataChanged();
 
 
     //ToolBar
@@ -180,6 +184,7 @@ MainWindow::MainWindow(QWidget *parent) :
     empty->setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Preferred);
     ui->mainToolBar->addWidget(empty);
     ui->mainToolBar->addAction(QPixmap(":icons/ic_add"), "Создать новый контакт", this, SLOT(addContactClicked()));
+    ui->mainToolBar->addAction(QPixmap(":icons/ic_del"), "Удалить контакт", this, SLOT(delContactClicked()));
     QAction *activeAction = new QAction(QPixmap(":icons/ic_mode_active"),"Активные", this);
     ui->mainToolBar->addAction(activeAction);
     QToolButton *activeButton = dynamic_cast<QToolButton*>(ui->mainToolBar->widgetForAction(activeAction));
@@ -195,12 +200,21 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+//Узнаем текущий id из базы
+void MainWindow::listViewItemClicked(QModelIndex index)
+{
+    //id = index.model()->data(index.model()->index(index.row(), 0), Qt::DisplayRole).toInt();
+    id = index.row();
+}
+
+
 void MainWindow::setTEHeight (QPlainTextEdit* edit, int nRows)
 {
     QFontMetrics m (edit -> font()) ;
     int RowHeight = m.lineSpacing() ;
     edit -> setFixedHeight  (nRows * RowHeight) ;
 }
+
 
 void MainWindow::addContactClicked()
 {
@@ -210,6 +224,13 @@ void MainWindow::addContactClicked()
     model->select();
 
     mapper->toLast();
+}
+
+
+void MainWindow::delContactClicked()
+{
+    model->removeRow(id);
+    model->select();
 }
 
 //void MainWindow::refreshUI()
@@ -230,11 +251,4 @@ void MainWindow::addContactClicked()
 //    delete(oneModel);
 //}
 
-//void MainWindow::listViewItemClicked(QModelIndex index )
-//{
-//    //id = index.model()->data(index.model()->index(index.row(), 0), Qt::DisplayRole).toInt();
-//    //refreshUI();
-//    mapper->setCurrentIndex(index.row());
 
-//    //qDebug() <<"id=";
-//}
