@@ -1,7 +1,7 @@
 #include "person.h"
 
 const QString Person::TABLE_NAME = "Persons";
-const QString Person::COL_ID = "_id";
+//const QString Person::COL_ID = "_id";
 const QString Person::COL_FIO = "fio";
 const QString Person::COL_DR = "dr";
 const QString Person::COL_PARENTS = "parents";
@@ -15,9 +15,8 @@ const QString Person::COL_NEXTDATE = "nextdate";
 const QString Person::COL_D_LASTDATE = "d_lastdate";
 const QString Person::COL_LASTDATE = "lastdate";
 const QString Person::COL_STATUS = "status";
-const QString Person::COL_DAYS = "case when (d_lastdate > 0) then (strftime('%s', 'now','localtime')*1000 - d_lastdate)/86400000 else 'no' end as day";
-const QStringList Person::FIELDS = QStringList() << "COL_ID"
-                                                 << "COL_FIO"
+//const QString Person::COL_DAYS = "case when (d_lastdate > 0) then (strftime('%s', 'now','localtime')*1000 - d_lastdate)/86400000 else 'no' end as day";
+const QStringList Person::FIELDS = QStringList() << "COL_FIO"
                                                  << "COL_DR"
                                                  << "COL_PARENTS"
                                                  << "COL_M_ADDR"
@@ -29,11 +28,15 @@ const QStringList Person::FIELDS = QStringList() << "COL_ID"
                                                  << "COL_NEXTDATE"
                                                  << "COL_D_LASTDATE"
                                                  << "COL_LASTDATE"
-                                                 << "COL_STATUS"
-                                                 << "COL_DAYS";
+                                                 << "COL_STATUS";
+                                                //<< "COL_DAYS"
+                                                //<< "COL_ID"
+
 const QString Person::CREATE_TABLE =
-            "CREATE TABLE " + Person::TABLE_NAME + "("
-                    + Person::COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+            //"CREATE TABLE " + Person::TABLE_NAME + "("
+            "CREATE VIRTUAL TABLE " + TABLE_NAME + " USING fts4("
+                    +"tokenize=unicode61,"
+                    //+ Person::COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                     + Person::COL_FIO + " TEXT NOT NULL DEFAULT '',"
                     + Person::COL_DR + " INTEGER DEFAULT '',"
                     + Person::COL_PARENTS + " TEXT DEFAULT '',"
@@ -68,7 +71,7 @@ Person::Person()
 
 Person::Person(QSqlQueryModel &model)
 {
-    this->id = model.record(0).value(COL_ID).toInt();
+    //this->id = model.record(0).value(COL_ID).toInt();
     this->fio = model.record(0).value(COL_FIO).toString();
     this->dr = model.record(0).value(COL_DR).toInt();
     this->parents = model.record(0).value(COL_PARENTS).toString();

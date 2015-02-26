@@ -5,6 +5,7 @@
 #include <QLineEdit>
 #include <QDateTime>
 #include <QCheckBox>
+#include "mainwindow.h"
 
 class DetailDelegate : public QItemDelegate
 {

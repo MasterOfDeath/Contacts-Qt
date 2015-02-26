@@ -7,8 +7,10 @@
 #include <QSqlQueryModel>
 #include <QSqlTableModel>
 #include <QFile>
-#include <QMessageBox>
+#include <QDir>
 #include <QDebug>
+#include <QMessageBox>
+#include <QDateTime>
 
 class DatabaseHandler
 {
@@ -17,10 +19,14 @@ public:
     ~DatabaseHandler();
 public:
     bool openDB();
+    void closeDB();
     bool deleteDB();
     bool createPersonTable();
     QSqlError lastError();
     Person *getPerson(long id);
+    void setLastPos(int pos, QString curStatus);
+    //int getLastPos();
+    void getLastPos(int& pos,QString& curStatus);
     bool putPerson(Person person);
     bool removePerson(long id);
     QSqlQueryModel *queryAllData();
@@ -29,6 +35,11 @@ public:
 private:
     QSqlDatabase db;
     QString nameDB;
+    QDir dirDB;
+    QDir dirBackUp;
+    QString dateFormat;
+    void doBackup(QString nameDB, QDir *dirBackUp);
+    void removeOldest(QDir *dirBackUp);
 };
 
 #endif // DATABASEHANDLER_H

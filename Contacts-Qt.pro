@@ -12,24 +12,29 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = Contacts-Qt
 TEMPLATE = app
 
+include(qtxlsx/src/xlsx/qtxlsx.pri)
 
 SOURCES += main.cpp\
         mainwindow.cpp \
     databasehandler.cpp \
     person.cpp \
-    customwidget.cpp \
-    detaildelegate.cpp
+    detaildelegate.cpp \
+    searchdialog.cpp \
+    toexcel.cpp
 
 HEADERS  += mainwindow.h \
     databasehandler.h \
     person.h \
-    customwidget.h \
-    detaildelegate.h
+    detaildelegate.h \
+    common.h \
+    searchdialog.h \
+    toexcel.h
 
-FORMS    += mainwindow.ui \
-    customlistviewitem.ui
+FORMS    += mainwindow.ui
 
 RESOURCES += \
-    resources/icons.qrc
+    resources/resources.qrc
 
 win32:RC_ICONS += resources/icons/ic_launcher.ico
+
+#CONFIG += c++11

@@ -1,0 +1,25 @@
+<RCC>
+    <qresource prefix="/icons">
+        <file alias="ic_add">icons/ic_add.png</file>
+        <file alias="ic_close_search">icons/ic_close_search.png</file>
+        <file alias="ic_mode_active">icons/ic_mode_active.png</file>
+        <file alias="ic_mode_all">icons/ic_mode_all.png</file>
+        <file alias="ic_mode_deactive">icons/ic_mode_deactive.png</file>
+        <file alias="ic_search">icons/ic_search.png</file>
+        <file alias="ic_launcher">icons/ic_launcher.ico</file>
+        <file alias="ic_del">icons/ic_del.png</file>
+        <file alias="c_action_left">icons/ic_action_left.png</file>
+        <file alias="c_action_right">icons/ic_action_right.png</file>
+        <file alias="ic_btnupdate_dark">icons/ic_btnupdate_dark.png</file>
+        <file alias="ic_mode_active_small">icons/ic_mode_active_small.png</file>
+        <file alias="ic_mode_all_small">icons/ic_mode_all_small.png</file>
+        <file alias="ic_mode_deactive_small">icons/ic_mode_deactive_small.png</file>
+        <file alias="ic_save">icons/ic_save.png</file>
+        <file alias="ic_menu">icons/ic_menu.png</file>
+        <file alias="ic_import">icons/ic_import.png</file>
+        <file alias="ic_export">icons/ic_export.png</file>
+    </qresource>
+    <qresource prefix="/tr">
+        <file>qtbase_ru.qm</file>
+    </qresource>
+</RCC>
