@@ -413,6 +413,8 @@ void MainWindow::updateModel(QString curStatus)
     model->submitAll();
     model->setFilter(filter);
     model->select();
+    while (model->canFetchMore())
+              model->fetchMore();
     mapper->setModel(model);
 }
 
