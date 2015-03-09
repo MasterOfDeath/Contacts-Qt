@@ -239,6 +239,8 @@ void MainWindow::addContactClicked()
 
         model->submitAll();
         model->select();
+        while (model->canFetchMore())
+                  model->fetchMore();
         mapper->toLast();
 
         enableUI(true);
